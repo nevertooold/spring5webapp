@@ -18,10 +18,9 @@ public class Author {
   @ManyToMany(mappedBy = "authors")
   private Set<Book> books = new HashSet<>();
 
-  public Author(String firstName, String lastName, Set<Book> books) {
+  public Author(String firstName, String lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.books = books;
   }
 
   public Author() {}
@@ -72,6 +71,6 @@ public class Author {
 
   @Override
   public int hashCode() {
-    return id.hashCode();
+    return id != null ? id.hashCode() : 0;
   }
 }

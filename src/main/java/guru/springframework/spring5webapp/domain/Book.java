@@ -2,6 +2,7 @@ package guru.springframework.spring5webapp.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -22,10 +23,9 @@ public class Book {
       inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
   private Set<Author> authors = new HashSet<>();
 
-  public Book(String title, String isbn, Set<Author> authors) {
+  public Book(String title, String isbn) {
     this.title = title;
     this.isbn = isbn;
-    this.authors = authors;
   }
 
   public Book() {}
@@ -56,12 +56,18 @@ public class Book {
 
   @Override
   public String toString() {
-    return "Book{" +
-            "id=" + id +
-            ", title='" + title + '\'' +
-            ", isbn='" + isbn + '\'' +
-            ", authors=" + authors +
-            '}';
+    return "Book{"
+        + "id="
+        + id
+        + ", title='"
+        + title
+        + '\''
+        + ", isbn='"
+        + isbn
+        + '\''
+        + ", authors="
+        + authors
+        + '}';
   }
 
   @Override
@@ -71,11 +77,11 @@ public class Book {
 
     Book book = (Book) o;
 
-    return id.equals(book.id);
+    return Objects.equals(id, book.id);
   }
 
   @Override
   public int hashCode() {
-    return id.hashCode();
+    return id != null ? id.hashCode() : 0;
   }
 }
