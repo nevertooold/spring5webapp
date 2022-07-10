@@ -42,6 +42,9 @@ public class BootstrapData implements CommandLineRunner {
     Address address = new Address("Address Line 1", "Street", "City", "Zip");
     Publisher publisher = new Publisher("Publisher", address);
 
+    ddd.setPublisher(publisher);
+    publisher.getBooks().add(ddd);
+
     publisherRepository.save(publisher);
 
 

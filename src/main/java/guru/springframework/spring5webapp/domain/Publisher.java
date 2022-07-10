@@ -2,10 +2,9 @@ package guru.springframework.spring5webapp.domain;
 
 import guru.springframework.spring5webapp.domain.embedded.Address;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -17,6 +16,10 @@ public class Publisher {
     private String name;
 
     private Address address;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
@@ -50,6 +53,14 @@ public class Publisher {
         this.address = address;
     }
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +82,7 @@ public class Publisher {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address=" + address +
+                ", books=" + books +
                 '}';
     }
 }
